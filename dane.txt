@@ -1,0 +1,7 @@
+Temat: Szpital
+Wykorzystywane technologie: Spring Boot 2, MySQL, Angular
+Zespół: 
+Kalita Patrycja - pati.kalita@gmail.com
+-
+Kot Marcin - marcin.kot140@gmail.com
+-
