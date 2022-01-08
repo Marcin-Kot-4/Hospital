@@ -1,7 +1,7 @@
 -- -----------------------------------------------------
 -- Schema szpital
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `szpital`;
+DROP SCHEMA IF EXISTS `hospital`;
 
-CREATE SCHEMA `szpital`;
-USE `szpital` ;
+CREATE SCHEMA `hospital`;
+USE `hospital` ;
