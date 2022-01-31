@@ -41,6 +41,6 @@ public class Address {
 
     // address - nazwa atrybutu będącego obiektem klasy Address znajdującego się w klasie User
     // parametr mappedBy mówi które pole w drugiej klasie odpowiada tej samej relacji
-//    @OneToMany(mappedBy = "address")
-//    private Set<User> users;
+    // @OneToMany(mappedBy = "address")
+    // private Set<User> users;
 }

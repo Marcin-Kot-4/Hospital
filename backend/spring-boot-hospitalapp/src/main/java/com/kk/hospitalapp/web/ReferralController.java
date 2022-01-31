@@ -18,6 +18,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Klasa ReferralController do wczytywania templatów dla różnych adresów.
+ */
 @Controller
 public class ReferralController {
 
@@ -33,6 +36,12 @@ public class ReferralController {
     @Autowired
     private MedicalHistoryService medicalHistoryService;
 
+    /**
+     * Metoda referralList() wyświetla listę skierowań, które zostały wystawione zalogowanemu pacjentowi.
+     * Zwraca template referralList.html pod adresem /referralList.
+     * @param model
+     * @return
+     */
     @GetMapping("/referralList")
     public String referralList(Model model) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -44,6 +53,13 @@ public class ReferralController {
         return "referralList";
     }
 
+    /**
+     * Metoda getAll() wyświetla skierowanie z bazy.
+     * Zwraca template ereferral.html pod adresem /ereferral.
+     * @param referralId
+     * @param model
+     * @return
+     */
     @GetMapping("/ereferral")
     public String getAll(@RequestParam("referral_id") Long referralId, Model model){
         Referral referral = referralService.getById(referralId);
@@ -56,8 +72,20 @@ public class ReferralController {
         return "ereferral";
     }
 
+    /**
+     * Metoda issuedReferral() zwraca template issuedReferral.html
+     * pod adresem /issuedReferral.
+     * Po poprawnym wypełnieniu formularza, do bazy zostaje dodane skierowanie.
+     * @param name
+     * @param surname
+     * @param pesel
+     * @param place
+     * @param diagnosis
+     * @param otherInformations
+     * @return
+     */
     @PostMapping("/issuedReferral")
-    public String issuedPrescription(@RequestParam(name = "name") String name, @RequestParam(name = "surname") String surname,
+    public String issuedReferral(@RequestParam(name = "name") String name, @RequestParam(name = "surname") String surname,
                                      @RequestParam(name = "pesel") Long pesel, @RequestParam(name = "place") String place,
                                      @RequestParam(name = "diagnosis") String diagnosis, @RequestParam(name = "otherInformations") String otherInformations) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

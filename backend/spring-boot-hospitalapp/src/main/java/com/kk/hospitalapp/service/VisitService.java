@@ -33,12 +33,4 @@ public class VisitService {
         return visitRepository.getById(visitId);
     }
 
-//    public Visit save(){
-//
-//    }
-
-//    public List<Visit> getAllById(){
-//
-//    }
-
 }

@@ -9,12 +9,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
 
+/**
+ * Klasa WardController do wczytywania templata.
+ */
 @Controller
 public class WardController {
 
     @Autowired
     private WardService wardService;
 
+    /**
+     * Metoda getAll() wyświetla liste oddziałów.
+     * Zwraca template wardList.html pod adresem /wardList.
+     * @param model
+     * @return
+     */
     @GetMapping("/wardList")
     public String getAll(Model model){
         List<Ward> wards = wardService.getAll();

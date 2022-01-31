@@ -16,6 +16,11 @@ public class DoctorService {
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * Metoda getDoctorByUserName() zwraca encje doktora po korespondującym id użytkownika.
+     * @param userName
+     * @return
+     */
     public Doctor getDoctorByUserName(String userName) {
         User user = userRepository.findByLogin(userName);
         Long userId = user.getId();

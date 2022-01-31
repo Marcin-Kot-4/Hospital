@@ -21,11 +21,19 @@ public class UserRegistrationController {
         return new UserRegistrationDto();
     }
 
+    /**
+     * Metoda showRegistrationForm() wyświetla stronę registration.html z templates
+     * @return
+     */
     @GetMapping
     public String showRegistrationForm() {
-        return "registration"; // wyświetla stronę registration.html z templates
+        return "registration";
     }
 
+    /**
+     * Metoda registerUserAccount() po poprawnym wypełnieniu formularza, zostaje tworzone nowe konto użytkownika.
+     * @return
+     */
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user")UserRegistrationDto registrationDto) {
         userService.save(registrationDto);

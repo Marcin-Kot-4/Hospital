@@ -15,6 +15,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Klasa PrescriptionController do wczytywania templatów dla różnych adresów.
+ */
 @Controller
 public class PrescriptionController {
     
@@ -36,6 +39,12 @@ public class PrescriptionController {
     @Autowired
     private HospitalService hospitalService;
 
+    /**
+     * Metoda prescriptionList() wyświetla listę recept, które zostały wystawione zalogowanemu pacjentowi.
+     * Zwraca template prescriptionList.html pod adresem /prescriptionList.
+     * @param model
+     * @return
+     */
     @GetMapping("/prescriptionList")
     public String prescriptionList(Model model) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -47,6 +56,13 @@ public class PrescriptionController {
         return "prescriptionList";
     }
 
+    /**
+     * Metoda getAll() wyświetla receptę z bazy.
+     * Zwraca template eprescription.html pod adresem /eprescription.
+     * @param prescriptionId
+     * @param model
+     * @return
+     */
     @GetMapping("/eprescription")
     public String getAll(@RequestParam("prescription_id") Long prescriptionId, Model model){
         Prescription prescription = prescriptionService.getById(prescriptionId);
@@ -59,6 +75,18 @@ public class PrescriptionController {
         return "eprescription";
     }
 
+    /**
+     * Metoda issuedPrescription() zwraca template issuedPrescription.html
+     * pod adresem /issuedPrescription.
+     * Po poprawnym wypełnieniu formularza, do bazy zostaje dodana recepta.
+     * @param name
+     * @param surname
+     * @param pesel
+     * @param medicineName
+     * @param packsNumber
+     * @param dosage
+     * @return
+     */
     @PostMapping("/issuedPrescription")
     public String issuedPrescription(@RequestParam(name = "name") String name, @RequestParam(name = "surname") String surname,
                                  @RequestParam(name = "pesel") Long pesel, @RequestParam(name = "medicineName") String medicineName,

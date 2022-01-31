@@ -16,6 +16,9 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Klasa ScheduleController do wczytywania templatów dla różnych adresów.
+ */
 @Controller
 @Transactional
 public class ScheduleController {
@@ -29,6 +32,13 @@ public class ScheduleController {
     @Autowired
     private PatientService patientService;
 
+    /**
+     * Metoda getAll() wyświetla listę wolnych terminów, na danym oddziale.
+     * Zwraca template freeTerms.html pod adresem /freeTerms.
+     * @param wardId
+     * @param model
+     * @return
+     */
     @GetMapping("/freeTerms")
     public String getAll(@RequestParam("id") Long wardId, Model model){
         List<Schedule> schedules = scheduleService.getByWardId(wardId);
@@ -37,6 +47,14 @@ public class ScheduleController {
         return "freeTerms";
     }
 
+    /**
+     * Metoda getAll() dodaje wizytę do bazy. Na podstawie wybranego wcześniej oddziału oraz wolnego terminu z listy.
+     * @param scheduleId
+     * @param wardId
+     * @param userName
+     * @param model
+     * @return
+     */
     @GetMapping("/appointment")
     public RedirectView getAll(@RequestParam("schedule_id") Long scheduleId, @RequestParam("ward_id") Long wardId,
                          @RequestParam("user_name") String userName, Model model){

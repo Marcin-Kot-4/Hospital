@@ -14,6 +14,10 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
+/**
+ * Klasa VisitController do wczytywania templatów dla różnych adresów.
+ * Odwoływanie wizyty.
+ */
 @Controller
 @Transactional
 public class VisitController {
@@ -24,6 +28,11 @@ public class VisitController {
     @Autowired
     private ScheduleService scheduleService;
 
+    /**
+     * Metoda getAll() zwraca template doctorCancelVisit.html pod adresem /doctorCancelVisit.
+     * @param model
+     * @return
+     */
     @GetMapping("/doctorCancelVisit")
     public String getAll(Model model){
         List<Visit> visits = visitService.getAll();
@@ -31,6 +40,11 @@ public class VisitController {
         return "doctorCancelVisit";
     }
 
+    /**
+     * Metoda getAllPatient() zwraca template patientCancelVisit.html pod adresem /patientCancelVisit.
+     * @param model
+     * @return
+     */
     @GetMapping("/patientCancelVisit")
     public String getAllPatient(Model model){
         List<Visit> visits = visitService.getAllPatientVisits();
@@ -38,6 +52,12 @@ public class VisitController {
         return "patientCancelVisit";
     }
 
+    /**
+     * Metoda getAll() usuwa umówioną wizytę. Usunięty termin dodaje do listy wolnych terminów.
+     * @param visitId
+     * @param model
+     * @return
+     */
     @GetMapping("/cancelVisit")
     public RedirectView getAll(@RequestParam("visit_id") Long visitId, Model model){
         Visit visit = visitService.getById(visitId);
@@ -60,6 +80,12 @@ public class VisitController {
         return new RedirectView("patientCancelVisit");
     }
 
+    /**
+     * Metoda cancelVisitDoctor() usuwa umówioną wizytę. Usunięty termin dodaje do listy wolnych terminów.
+     * @param visitId
+     * @param model
+     * @return
+     */
     @GetMapping("/cancelVisitDoctor")
     public RedirectView cancelVisitDoctor(@RequestParam("visit_id") Long visitId, Model model){
         Visit visit = visitService.getById(visitId);

@@ -11,8 +11,12 @@ public class HospitalService {
     @Autowired
     HospitalRepository hospitalRepository;
 
+    /**
+     * Metoda getByHospitalId zwraca id szpitala.
+     * @param id
+     * @return
+     */
     public Hospital getByHospitalId(Long id){
         return hospitalRepository.getById(id);
     }
-
 }

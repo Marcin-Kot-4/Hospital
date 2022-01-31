@@ -1,5 +1,5 @@
 Temat: Szpital
-Wykorzystywane technologie: Spring Boot 2, MySQL, Angular
+Wykorzystywane technologie: Spring Boot 2, MySQL, Thymeleaf
 Projekt interejsu graficznego: Figma
 Link do mockupów: https://www.figma.com/file/k5rq6KwPphIS4dKUtQ4pYk/Szpital?node-id=0%3A1
 Model bazy danych wykonany w programie MySQL Workbench - "database_model.mwb" (dodatkowo zamieszczony zrzut ekranu).
@@ -9,8 +9,10 @@ Kalita Patrycja - pati.kalita@gmail.com
 - warstwa zapewniająca składowanie danych we współpracy z bazą danych
 - warstwa przetwarzania danych dla pacjenta
 - warstwa interfejsu uzytkownika dla pacjenta
+- testy jednostkowe
 Kot Marcin - marcin.kot140@gmail.com
 - projekt interfejsu graficznego dla lekarza
 - warstwa zapewniająca składowanie danych we współpracy z bazą danych
 - warstwa przetwarzania danych dla lekarza
 - warstwa interfejsu uzytkownika dla lekarza
+- testy jednostkowe

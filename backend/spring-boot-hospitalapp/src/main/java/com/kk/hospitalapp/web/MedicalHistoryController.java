@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+/**
+ * Klasa MedicalHistoryController do wczytywania templatów dla różnych adresów.
+ */
 @Controller
 public class MedicalHistoryController {
 
     @Autowired
     private MedicalHistoryService medicalHistoryService;
 
-    @GetMapping("/historyEntry")
-    public String historyEntry() {
-        return "historyEntry";
-    }
-
+    /** Metoda medicalHistory() zwraca template medicalHistory.html gdy isnieje Historia Pacjenta o podanyym peselu,
+     * pod adresem /medicalHistory */
     @PostMapping("/medicalHistory")
     public String medicalHistory(@RequestParam(name = "pesel") Long pesel, Model model) {
         List<MedicalHistory> medicalHistoryList = medicalHistoryService.getAllByPatientUser_Pesel(pesel);
@@ -29,6 +29,7 @@ public class MedicalHistoryController {
         return "medicalHistory";
     }
 
+    /** Metoda enterPesel() zwraca template enterPesel.html, pod adresem /enterPesel */
     @GetMapping("/enterPesel")
     public String enterPesel() {
         return "enterPesel";

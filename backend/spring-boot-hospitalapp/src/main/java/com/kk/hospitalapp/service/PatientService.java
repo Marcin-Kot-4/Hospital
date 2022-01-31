@@ -16,21 +16,27 @@ public class PatientService {
     @Autowired
     UserRepository userRepository;
 
+    /**
+     * Metoda getPatientByUserName() zwraca encje pacjenta po korespondującym id użytkownika.
+     * @param userName
+     * @return
+     */
     public Patient getPatientByUserName(String userName){
         User user = userRepository.findByLogin(userName);
         Long userId = user.getId();
-//        System.out.println("userId --------------------------------------------------" + userId);
         Patient patient = patientRepository.findPatientByUserId(userId);
-//        System.out.println("patient.getID---------------------------------------------------" + patient.getId());
         return patient;
     }
 
+    /**
+     * Metoda getPatientByUserPesel() zwraca encje pacjenta po korespondującym id użytkownika.
+     * @param pesel
+     * @return
+     */
     public Patient getPatientByUserPesel(Long pesel){
         User user = userRepository.findByPesel(pesel);
         Long userId = user.getId();
-//        System.out.println("userId --------------------------------------------------" + userId);
         Patient patient = patientRepository.findPatientByUserId(userId);
-//        System.out.println("patient.getID---------------------------------------------------" + patient.getId());
         return patient;
     }
 }

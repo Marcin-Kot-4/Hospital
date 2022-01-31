@@ -26,7 +26,11 @@ public class UserServiceImpl implements UserService {
     private final AddressRepository addressRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
-    // Dodaje użytkownika do bazy danych
+    /**
+     * Metoda save() dodaje użytkownika do bazy danych.
+     * @param registrationDto
+     * @return
+     */
     @Override
     public User save(UserRegistrationDto registrationDto) {
         Address address = new Address(registrationDto.getStreet(),
@@ -41,6 +45,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
+    /**
+     * Metoda loadUserByUsername() logowanie użytkownika.
+     * @param username
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -52,7 +62,11 @@ public class UserServiceImpl implements UserService {
                 mapRolesToAuthorities(user.getRoles()));
     }
 
-    // Ta metoda konwertuje role na obiekt klasy SimpleGrantedAuthority (klasa należąca do Spring Security)
+    /**
+     * Metoda mapRolesToAuthorities() konwertuje role na obiekt klasy SimpleGrantedAuthority (klasa należąca do Spring Security)
+     * @param roles
+     * @return
+     */
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
     }
