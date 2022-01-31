@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital - E-Referral</title>
+
+    <link th:href="@{/css/base.css}" rel="stylesheet"/>
+    <link th:href="@{/css/edoc.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="form-group">
+            <img class="logo" th:src="@{images/logo.png}" width="80" style="vertical-align:middle;" alt="logo"/>
+            <span><b>E-Referral</b></span>
+            <a th:href="@{/logout}"><input type="submit" name="login-submit" id="login-submit" style="margin-top: 20px; float: right;"
+                                           class="form-button-log" value="Log Out"/></a>
+        </div>
+    </header>
+    <div class="contest" style="margin-top: 5px;">
+        <a class="back" th:href="@{/referralList}">&#8592; Back to main page</a>
+
+        <div class="document">
+
+            <div class="schema">
+                <div style="margin-top: 15px; margin-left: 10px; margin-right: 10px">
+                    <span style="font-size: 30px;"><b>E-Referral</b></span>
+                    <p th:text="${referral.place}" style="float:right;">Place where</p>
+                </div>
+
+                <div style="height: 58px; width:100%; display: inline-block">
+                    <div style="float:left; margin-left: 10px">
+                        <p><label>Access code:</label>
+                            <b th:text="${referral.accessCode}" style="font-size: 24px">0000</b></p>
+                    </div>
+                    <div style="float:right; margin-top: 7px; margin-right: 10px;">
+                        <p><label>Issued:</label></p>
+                            <p th:text="${referral.issued}">0000-00-00</p>
+                    </div>
+                </div>
+
+                <hr style="width: 380px; margin-left: 10px; margin-top: 10px; border: 0; color:gray;background-color:gray; height: 1px">
+
+                <table class="patient" align="left">
+                    <tr>
+                        <td style="height: 25px;">
+                            <label>Patient:</label>
+                        </td>
+                        <td style="height: 25px;">
+                            <p th:text="|${referral.patient.user.name} ${referral.patient.user.surname}|"><b style="font-size: 24px">Name Surname</b></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Exhibitor:</label>
+                        </td>
+                        <td th:text="${referral.exhibitor}">
+                            <p>Name of hospital<br>
+                                AND ADDRESS</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Control date:</label>
+                        </td>
+                        <td th:text="${referral.issued}">
+                            <p>0000-00-00</p>
+                        </td>
+                    </tr>
+                </table>
+
+                <hr style="width: 380px; border: 0; margin-left: 10px; color:gray;background-color:gray; height: 1px">
+
+                <div class="diagnosis" align="left">
+
+                    <lable>Diagnosis</lable>
+                    <p th:text="${referral.diagnosis}"><b style="font-size: 18px">Something somewhere</b></p>
+                    <label style="font-size: 14px">Other information:</label>
+                    <p th:text="${referral.other_informations}" style="font-size: 12px">Mniam mniam mniam</p>
+                </div>
+
+                <hr style="width: 380px; border: 0; margin-left: 10px; color:gray;background-color:gray; height: 1px">
+
+                <div class="ex-dok" align="left">
+                    <lable style="font-size: 12px">Person exhibitor:</lable>
+                    <p th:text="|${referral.doctor.user.name} ${referral.doctor.user.surname}|" style="font-size: 14px">Something somewhere</p>
+                    <p th:text="${referral.doctor.pwzNumber}" style="font-size: 10px">PWZ: NUMBER</p>
+                    <p th:text="${referral.doctor.specialisation}" style="font-size: 10px">Specialization</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

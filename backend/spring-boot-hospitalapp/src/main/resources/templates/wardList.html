@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital - Wards list</title>
+
+    <link th:href="@{/css/base.css}" rel="stylesheet"/>
+    <link th:href="@{/css/wardList.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="form-group">
+            <img class="logo" th:src="@{images/logo.png}" width="80" style="vertical-align:middle;" alt="logo"/>
+            <span><b>Wards in this hospital.</b></span>
+            <a th:href="@{/logout}"><input type="submit" name="login-submit" id="login-submit" style="margin-top: 20px; float: right;"
+                                           class="form-button-log" value="Log Out"/></a>
+        </div>
+    </header>
+    <div class="contest" style="margin-top: 5px">
+        <a class="back" th:href="@{/patient}">&#8592; Back to main page</a>
+
+        <div class="form-table" style="text-align: center">
+            <table align="center">
+                <tr>
+                    <td colspan="2"><label class="control-label"
+                                           style="font-size: 20px; font-weight: bold;">
+                        Choose ward, where you want to make appointment: </label></td>
+                </tr>
+                <tr>
+                    <td style="width: 40px"><label class="control-label"
+                                                    style="font-size: 16px; font-weight: bold;"> ID </label>
+                    </td>
+                    <td style="width: 600px"><label class="control-label"
+                                                    style="font-size: 16px; font-weight: bold;"> Ward name </label></td>
+                </tr>
+                <tr th:each="ward: ${wards}">
+                    <td th:text="${ward.id}"><label class="control-label"> 1 </label></td>
+                    <td ><label class="control-label"> <a th:href="@{/freeTerms(id=${ward.id})}" th:text="${ward.wardName}" /> </label></td>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

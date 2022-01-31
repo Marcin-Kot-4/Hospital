@@ -7,6 +7,10 @@ Zespół:
 Kalita Patrycja - pati.kalita@gmail.com
 - projekt interfejsu graficznego dla pacjenta
 - warstwa zapewniająca składowanie danych we współpracy z bazą danych
+- warstwa przetwarzania danych dla pacjenta
+- warstwa interfejsu uzytkownika dla pacjenta
 Kot Marcin - marcin.kot140@gmail.com
 - projekt interfejsu graficznego dla lekarza
 - warstwa zapewniająca składowanie danych we współpracy z bazą danych
+- warstwa przetwarzania danych dla lekarza
+- warstwa interfejsu uzytkownika dla lekarza

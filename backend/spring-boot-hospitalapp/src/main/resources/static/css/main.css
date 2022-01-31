@@ -1,0 +1,48 @@
+body{
+    background: linear-gradient(135deg, rgba(160,204,242,1) 0%, rgba(4,118,217,1) 100%);
+}
+
+.form-control{
+    background: #CBE3F8;
+}
+
+.form-control-reg{
+    width: 130px;
+    height: 30px;
+    background: #CBE3F8;
+    border: 0px;
+    border-radius: 5px;
+}
+
+.form-button{
+    margin-top: 20px;
+    height: 40px;
+    width: 150px;
+    background: #0476D9;
+}
+
+.form-button:hover{
+    margin-top: 20px;
+    height: 40px;
+    width: 150px;
+    background: #0164bb;
+}
+
+.floatLeft{
+    width: 50%;
+    float: left;
+}
+
+.floatRight{
+    width: 50%;
+    float: right;
+}
+
+*:focus {
+    outline: none;
+}
+
+header {
+    display: flex;
+    align-items: center;
+}

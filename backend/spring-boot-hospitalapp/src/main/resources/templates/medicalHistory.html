@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital - Medical History</title>
+
+    <link th:href="@{/css/base.css}" rel="stylesheet"/>
+    <link th:href="@{/css/medicalHistory.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="form-group">
+            <img class="logo" th:src="@{images/logo.png}" width="80" style="vertical-align:middle;" alt="logo"/>
+            <span><b>Medical History</b></span>
+            <a th:href="@{/logout}"><input type="submit" name="login-submit" id="login-submit" style="margin-top: 20px; float: right;"
+                                           class="form-button-log" value="Log Out"/></a>
+        </div>
+    </header>
+    <div class="contest" style="margin-top: 5px;">
+        <a class="back" th:href="@{/enterPesel}">&#8592; Back to searching patient</a>
+
+        <div class="form-table" style="text-align: center">
+            <table  align="center">
+                <tr>
+                    <td colspan="5"><label class="control-label"
+                                           style="font-size: 20px; font-weight: bold;">
+                        Medical History: Name Surname </label></td>
+                </tr>
+                <tr>
+                    <td style="width: 100px"><label class="control-label"
+                                                   style="font-size: 18px; font-weight: bold;"> Date </label></td>
+                    <td style="width: 150px"><label class="control-label"
+                                                    style="font-size: 18px; font-weight: bold;"> Disease </label></td>
+                    <td style="width: 250px"><label class="control-label"
+                                                    style="font-size: 18px; font-weight: bold;"> Interview </label></td>
+                    <td style="width: 250px"><label class="control-label"
+                                                    style="font-size: 18px; font-weight: bold;"> Treatment </label></td>
+                </tr>
+                <tr th:each="medicalHistory: ${medicalHistoryList}">
+                    <td th:text="${medicalHistory.startDateOfTreatment}"><label class="control-label"> 0000-00-00 </label></td>
+                    <td th:text="${medicalHistory.diseaseName}"><label class="control-label"> Lorem polem </label></td>
+                    <td th:text="${medicalHistory.interview}"><label class="control-label"> Interview </label></td>
+                    <td th:text="${medicalHistory.endDateOfTreatment}"><label class="control-label"> Treatment </label></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

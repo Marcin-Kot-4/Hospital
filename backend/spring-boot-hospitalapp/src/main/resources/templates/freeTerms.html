@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital - Free termins</title>
+
+    <link th:href="@{/css/base.css}" rel="stylesheet"/>
+    <link th:href="@{/css/chooseVisit.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="form-group">
+            <img class="logo" th:src="@{images/logo.png}" width="80" style="vertical-align:middle;" alt="logo"/>
+            <span><b>Calender visits - free termins.</b></span>
+            <a th:href="@{/logout}"><input type="submit" name="login-submit" id="login-submit" style="margin-top: 20px; float: right;"
+                                           class="form-button-log" value="Log Out"/></a>
+        </div>
+    </header>
+    <div class="contest" style="margin-top: 5px;">
+        <a class="back" th:href="@{/wardList}">&#8592; Back to main page</a>
+
+        <div class="form-table" style="text-align: center">
+            <table  align="center">
+                <tr>
+                    <td colspan="5"><label class="control-label"
+                                           style="font-size: 20px; font-weight: bold;">
+                        Visit calender </label></td>
+                </tr>
+                <tr>
+                    <td style="width: 100px"><label class="control-label"
+                                                    style="font-size: 16px; font-weight: bold;"> Date </label></td>
+                    <td style="width: 80px"><label class="control-label"
+                                                   style="font-size: 16px; font-weight: bold;"> Hour </label></td>
+                    <td style="width: 300px"><label class="control-label"
+                                                    style="font-size: 16px; font-weight: bold;"> Doctor </label></td>
+                    <td style="width: 120px"><label class="control-label"
+                                                    style="font-size: 16px; font-weight: bold;">Number room</label></td>
+                    <td style="width: 120px"></td>
+                </tr>
+                <tr th:each="schedule: ${schedules}">
+                    <td th:text="${schedule.date}"><label class="control-label"> 0000-00-00 </label></td>
+                    <td th:text="${schedule.fromHour}"><label class="control-label"> 00:00 </label></td>
+                    <td th:text="|${schedule.doctor.user.name} ${schedule.doctor.user.surname}|"><label class="control-label"> dr. Name Surname </label></td>
+                    <td th:text="${schedule.room.roomNumber}"><label class="control-label"> 0.00d </label></td>
+                    <td>
+                        <div class="bottom">
+                            <a th:href="@{/appointment(schedule_id=${schedule.id},ward_id=${schedule.ward.id},user_name=${#authentication.getPrincipal().getUsername()})}" >
+                                <input type="submit" name="submit" id="choose" class="button-choose" value="Choose"/></a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

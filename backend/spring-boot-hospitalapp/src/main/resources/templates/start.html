@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital</title>
+
+    <link th:href="@{/css/base.css}" rel="stylesheet"/>
+    <link th:href="@{/css/start.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="form-group">
+            <img class="logo" th:src="@{images/logo.png}" width="80" style="vertical-align:middle;" alt="logo"/>
+
+            <a th:href="@{/loginn}"><input type="submit" name="login-submit" id="login-submit" style="margin-top: 20px;"
+                                           class="form-button-log" value="Log In"/></a>
+
+            <a th:href="@{/registration}"><input type="submit" name="register-submit" id="register-submit" style="margin-top: 20px;"
+                                                 class="form-button-reg" value="Register"/></a>
+        </div>
+    </header>
+    <div class="contest">
+        <div class="leftBody" th:style="'background:url('+ @{/images/texture-start.png} +') no-repeat fixed 20% 60%;'">
+            <h1>Feel better about<br>finding healthcare</h1>
+            <p>Your health and wellbeing is important to us.<br>
+                When it comes to staying well, physically and emotionally,<br>
+                we are with you all the way.</p>
+            <h2>Here is a little more<br>about us</h2>
+            <a th:href="@{/aboutUs}"> Learn more about us &#8594;</a>
+        </div>
+        <div class="rightBody">
+            <img class="doctor" th:src="@{images/doctor.jpg}" alt="doctor"/>
+        </div>
+    </div>
+</div>
+</body>
+</html>

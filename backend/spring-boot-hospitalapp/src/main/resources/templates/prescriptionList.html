@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital - Prescriptions list</title>
+
+    <link th:href="@{/css/base.css}" rel="stylesheet"/>
+    <link th:href="@{/css/list.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="form-group">
+            <img class="logo" th:src="@{images/logo.png}" width="80" style="vertical-align:middle;" alt="logo"/>
+            <span><b>Prescriptions list.</b></span>
+            <a th:href="@{/logout}"><input type="submit" name="login-submit" id="login-submit" style="margin-top: 20px; float: right;"
+                                           class="form-button-log" value="Log Out"/></a>
+        </div>
+    </header>
+    <div class="contest" style="margin-top: 5px">
+        <a class="back" th:href="@{/patient}">&#8592; Back to main page</a>
+
+        <div class="form-table" style="text-align: center">
+            <table align="center">
+                <tr>
+                    <td colspan="5"><label class="control-label"
+                                           style="font-size: 20px; font-weight: bold;">
+                        List of prescriptions </label></td>
+                </tr>
+                <tr>
+                    <td style="width: 120px"><label class="control-label"
+                                                    style="font-size: 16px; font-weight: bold;"> Release date </label>
+                    </td>
+                    <td style="width: 120px"><label class="control-label"
+                                                    style="font-size: 16px; font-weight: bold;"> Doctor
+                        </label></td>
+                    <td style="width: 250px"><label class="control-label"
+                                                    style="font-size: 16px; font-weight: bold;"> Prescription
+                        number </label></td>
+                    <td style="width: 140px"></td>
+                </tr>
+                <tr th:each="prescription: ${prescriptions}">
+                    <td th:text="${prescription.issued}"><label class="control-label"> 0000-00-00 </label></td>
+                    <td th:text="|${prescription.doctor.user.name} ${prescription.doctor.user.surname}|"><label class="control-label"> 0000-00-00 </label></td>
+                    <td th:text="${prescription.access_code}"><label class="control-label"> qw456yhj </label></td>
+                    <td>
+                        <div class="bottom">
+                            <a th:href="@{/eprescription(prescription_id=${prescription.id})}"><input type="submit" name="submit" id="view" class="button-view" value="View"/></a>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>

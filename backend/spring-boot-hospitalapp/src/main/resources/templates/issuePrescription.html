@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hospital - Issue a prescription</title>
+
+    <link th:href="@{/css/base.css}" rel="stylesheet"/>
+    <link th:href="@{/css/issue.css}" rel="stylesheet"/>
+</head>
+<body>
+<form action="#" th:action="@{/issuedPrescription}" th:object="${object}" method="post">
+    <div class="container">
+        <header>
+            <div class="form-group">
+                <img class="logo" th:src="@{images/logo.png}" width="80" style="vertical-align:middle;" alt="logo"/>
+                <span><b>Prescription</b></span>
+                <a th:href="@{/logout}"><input type="submit" name="login-submit" id="login-submit"
+                                               style="margin-top: 20px;"
+                                               class="form-button-log" value="Log Out"/></a>
+            </div>
+        </header>
+        <div class="contest" style="margin-top: 5px;">
+            <a class="back" th:href="@{/doctor}">&#8592; Back to main page</a>
+
+            <p style="margin-top: 30px">Complete the form below to issue a prescription.</p>
+
+            <p style="margin-top: 50px"><b>Patient data</b></p>
+            <table style="border-spacing:10px 15px;">
+                <tr>
+                    <td><label class="control-label" for="name" style="margin-right: 70px"> Name </label></td>
+                    <td><input th:name="name" id="name" class="form-control" required autofocus="autofocus"/></td>
+                    <td><label class="control-label" for="surname" style="margin-right: 40px"> Surname </label></td>
+                    <td><input th:name="surname" id="surname" class="form-control" required autofocus="autofocus"/></td>
+                </tr>
+                <tr>
+                    <td><label class="control-label" for="pesel" style="margin-right: 10px"> PESEL </label></td>
+                    <td><input th:name="pesel" id="pesel" class="form-control" required
+                               placeholder="00000000000" autofocus="autofocus"/></td>
+                </tr>
+            </table>
+            <p style="margin-top: 50px"><b>Medicine data</b></p>
+            <table style="border-spacing:10px 15px;">
+                <tr>
+                    <td><label class="control-label" for="medicineName" style="margin-right: 10px"> Medicine
+                        name </label>
+                    </td>
+                    <td><input th:name="medicineName" id="medicineName" class="form-control" required
+                               autofocus="autofocus"/></td>
+                    <td><label class="control-label" for="packsNumber" style="margin-right: 10px"> Packs number </label>
+                    </td>
+                    <td><input th:name="packsNumber" id="packsNumber" class="form-control" required
+                               autofocus="autofocus"/></td>
+                </tr>
+                <tr>
+                    <td><label class="control-label" for="dosage" style="margin-right: 10px"> Dosage </label></td>
+                    <td><textarea th:name="dosage" id="dosage" class="form-control-dosage" required
+                                  autofocus="autofocus"></textarea>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="bottom">
+            <a th:href="@{/doctor}"><input type="submit" name="login-submit" id="confirm" style="margin-top: 20px;"
+                                           class="button-confirm" value="Confirm"/></a>
+
+            <a th:href="@{/doctor}"><input type="button" name="register-submit" id="cancel" style="margin-top: 20px;"
+                                           class="button-cancel" value="Cancel"/></a>
+        </div>
+    </div>
+</form>
+</body>
+</html>

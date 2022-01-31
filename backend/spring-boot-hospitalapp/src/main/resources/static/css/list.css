@@ -1,0 +1,48 @@
+.form-table{
+    margin-top: 2%;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+table{
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+.button-download:hover {
+    height: 35px;
+    width: 100px;
+    background: #A61B1B;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+}
+
+.button-download {
+    height: 35px;
+    width: 100px;
+    background: transparent;
+    color: #A61B1B;
+    border: 2px solid #A61B1B;
+    border-radius: 10px;
+}
+
+.button-view:hover{
+    height: 35px;
+    width: 100px;
+    background: #0476D9;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+}
+
+.button-view{
+    height: 35px;
+    width: 100px;
+    background: transparent;
+    color: #0476D9;
+    border: 2px solid #0476D9;
+    border-radius: 10px;
+}

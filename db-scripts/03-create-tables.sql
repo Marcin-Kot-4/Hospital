@@ -3,24 +3,38 @@
 # Unless you have configured a different default storage engine,
 # issuing a CREATE TABLE statement without an ENGINE clause creates an InnoDB table.
 
+DROP TABLE IF EXISTS `users_roles`;
 DROP TABLE IF EXISTS `prescription`;
 DROP TABLE IF EXISTS `test`;
 DROP TABLE IF EXISTS `operation`;
 DROP TABLE IF EXISTS `visit`;
-DROP TABLE IF EXISTS `X-ray`;
+DROP TABLE IF EXISTS `x_ray`;
 DROP TABLE IF EXISTS `vaccination`;
 DROP TABLE IF EXISTS `referral`;
-DROP TABLE IF EXISTS `medical_history`;
+DROP TABLE IF EXISTS `medicine`;
 DROP TABLE IF EXISTS `average_visit_time`;
+DROP TABLE IF EXISTS `medical_history`;
+DROP TABLE IF EXISTS `schedule`;
 DROP TABLE IF EXISTS `patient`;
 DROP TABLE IF EXISTS `doctor`;
-DROP TABLE IF EXISTS `schedule`;
 DROP TABLE IF EXISTS `room`;
 DROP TABLE IF EXISTS `ward`;
 DROP TABLE IF EXISTS `hospital`;
-DROP TABLE IF EXISTS `medicine`;
 DROP TABLE IF EXISTS `user`;
 DROP TABLE IF EXISTS `address`;
+DROP TABLE IF EXISTS `role`;
+
+-- -----------------------------------------------------
+-- Table `hospital`.`role`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hospital`.`role`
+(
+    `id`          BIGINT       NOT NULL AUTO_INCREMENT,
+    `name`        VARCHAR(255) NULL DEFAULT NULL,
+    PRIMARY KEY (`id`)
+)
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 1;
 
 -- -----------------------------------------------------
 -- Table `hospital`.`address`
@@ -58,7 +72,18 @@ CREATE TABLE IF NOT EXISTS `hospital`.`user`
 )
     ENGINE = InnoDB
     AUTO_INCREMENT = 1;
-
+    
+    -- -----------------------------------------------------
+-- Table `hospital`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hospital`.`users_roles`
+(
+    `user_id`          BIGINT NOT NULL,
+    `role_id`          BIGINT NOT NULL
+)
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 1;
+    
 -- -----------------------------------------------------
 -- Table `hospital`.`medicine`
 -- -----------------------------------------------------
@@ -122,23 +147,6 @@ CREATE TABLE IF NOT EXISTS `hospital`.`room`
     AUTO_INCREMENT = 1;
 
 -- -----------------------------------------------------
--- Table `hospital`.`schedule`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hospital`.`schedule`
-(
-    `id`         BIGINT NOT NULL AUTO_INCREMENT,
-    `date`       DATE   NOT NULL,
-    `from_hour`  TIME   NOT NULL,
-    `to_hour`    TIME   NOT NULL,
-    `ward_id`    BIGINT DEFAULT NULL,
-    PRIMARY KEY (`id`),
-    INDEX (`ward_id`),
-    FOREIGN KEY (`ward_id`) REFERENCES `ward` (`id`)
-)
-    ENGINE = InnoDB
-    AUTO_INCREMENT = 1;
-
--- -----------------------------------------------------
 -- Table `hospital`.`doctor`
 -- -----------------------------------------------------
 -- nr_pwz - numer Prawa Wykonywania Zawodu (Centralny Rejestr Lekarzy)
@@ -171,6 +179,30 @@ CREATE TABLE IF NOT EXISTS `hospital`.`patient`
 )
     ENGINE = InnoDB
     AUTO_INCREMENT = 1;
+    
+    -- -----------------------------------------------------
+-- Table `hospital`.`schedule`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `hospital`.`schedule`
+(
+    `id`         BIGINT NOT NULL AUTO_INCREMENT,
+    `date`       DATE   NOT NULL,
+    `from_hour`  TIME   NOT NULL,
+    `to_hour`    TIME   NOT NULL,
+    `doctor_id`  BIGINT NOT NULL,
+    `room_id`    BIGINT NOT NULL,
+    `ward_id`    BIGINT DEFAULT NULL,
+    PRIMARY KEY (`id`),
+    INDEX (`doctor_id`),
+    INDEX (`room_id`),
+    INDEX (`ward_id`),
+    FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`),
+    FOREIGN KEY (`room_id`)   REFERENCES `room` (`id`),
+    FOREIGN KEY (`ward_id`)   REFERENCES `ward` (`id`)
+)
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 1;
+
 
 -- -----------------------------------------------------
 -- Table `hospital`.`medical_history`
@@ -199,6 +231,7 @@ CREATE TABLE IF NOT EXISTS `hospital`.`medical_history`
 CREATE TABLE IF NOT EXISTS `hospital`.`referral`
 (
     `id`                 BIGINT       NOT NULL AUTO_INCREMENT,
+    `place`              VARCHAR(255) NOT NULL,
     `access_code`        BIGINT       NOT NULL,
     `issued`             DATE         NOT NULL,
     `exhibitor`          VARCHAR(255) NOT NULL,
@@ -240,7 +273,7 @@ CREATE TABLE IF NOT EXISTS `hospital`.`vaccination`
 -- -----------------------------------------------------
 -- Table `hospital`.`X-ray`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `hospital`.`X-ray`
+CREATE TABLE IF NOT EXISTS `hospital`.`x_ray`
 (
     `id`                 BIGINT       NOT NULL AUTO_INCREMENT,
     `part_of_bodie`      VARCHAR(255) NOT NULL,
@@ -272,17 +305,20 @@ CREATE TABLE IF NOT EXISTS `hospital`.`visit`
     `completion`         BOOLEAN DEFAULT FALSE,
     `patient_id`         BIGINT NOT NULL,
     `doctor_id`          BIGINT NOT NULL,
+	`room_id`			 BIGINT NOT NULL,
     `ward_id`            BIGINT NOT NULL,
     `hospital_id`        BIGINT NOT NULL,
     `medical_history_id` BIGINT  DEFAULT NULL,
     PRIMARY KEY (`id`),
     INDEX (patient_id),
     INDEX (doctor_id),
+	INDEX (room_id),
     INDEX (ward_id),
     INDEX (hospital_id),
     INDEX (medical_history_id),
     FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`),
     FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`),
+	FOREIGN KEY (`room_id`) REFERENCES `room` (`id`),
     FOREIGN KEY (`ward_id`) REFERENCES `ward` (`id`),
     FOREIGN KEY (`hospital_id`) REFERENCES `hospital` (`id`),
     FOREIGN KEY (`medical_history_id`) REFERENCES `medical_history` (`id`)
@@ -297,7 +333,7 @@ CREATE TABLE IF NOT EXISTS `hospital`.`average_visit_time`
 (
     `id`                    BIGINT NOT NULL AUTO_INCREMENT,
     `average_visit_time`    FLOAT  NOT NULL,
-    `visit_number`          INT    NOT NULL,
+    `visits_number`         INT    NOT NULL,
     `patient_id`            BIGINT NOT NULL,
     `doctor_id`             BIGINT NOT NULL,
     `ward_id`               BIGINT NOT NULL,
@@ -323,7 +359,7 @@ CREATE TABLE IF NOT EXISTS `hospital`.`operation`
     `id`                 BIGINT       NOT NULL AUTO_INCREMENT,
     `reason`             VARCHAR(255) NOT NULL,
     `course`             VARCHAR(255) NOT NULL,
-    `medicine_id`        BIGINT DEFAULT NULL,
+    `medicine_id`        BIGINT       DEFAULT NULL,
     `medical_history_id` BIGINT       NOT NULL,
     PRIMARY KEY (`id`),
     INDEX (medicine_id),
@@ -364,10 +400,11 @@ CREATE TABLE IF NOT EXISTS `hospital`.`test`
 CREATE TABLE IF NOT EXISTS `hospital`.`prescription`
 (
     `id`                  BIGINT       NOT NULL AUTO_INCREMENT,
-    `date`                DATE         NOT NULL,
+    `access_code`         BIGINT       NOT NULL,
+    `issued`              DATE         NOT NULL,
+    `exhibitor`           VARCHAR(255) NOT NULL,
     `dosage`              VARCHAR(255) NOT NULL,
-    `pack_number`         INT          NOT NULL,
-    `payment`             INT          NOT NULL,
+    `packs_number`        INT          NOT NULL,
     `medicine_id`         BIGINT       NOT NULL,
     `patient_id`          BIGINT       NOT NULL,
     `doctor_id`           BIGINT       NOT NULL,
@@ -378,6 +415,7 @@ CREATE TABLE IF NOT EXISTS `hospital`.`prescription`
     INDEX (patient_id),
     INDEX (doctor_id),
     INDEX (medical_history_id),
+    INDEX (hospital_id),
     FOREIGN KEY (`medicine_id`) REFERENCES `medicine` (`id`),
     FOREIGN KEY (`patient_id`) REFERENCES `patient` (`id`),
     FOREIGN KEY (`doctor_id`) REFERENCES `doctor` (`id`),

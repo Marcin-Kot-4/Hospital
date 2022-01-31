@@ -1,0 +1,61 @@
+.form-control, .form-control:focus {
+    width: 200px;
+    height: 25px;
+    background: #E5E5E5;
+    border-radius: 10px;
+    border-color: transparent;
+    outline: none;
+}
+
+.form-control-dosage, .form-control-dosage:focus,
+.form-control-info, .form-control-info:focus,
+.form-control-diagnosis, .form-control-diagnosis:focus{
+    width: 200px;
+    height: 50px;
+    background: #E5E5E5;
+    border-radius: 10px;
+    border-color: transparent;
+    outline: none;
+}
+
+.button-cancel:hover {
+    float: right;
+    height: 35px;
+    width: 100px;
+    color: #BF0404;
+    border-color: transparent;
+    background: transparent;
+}
+
+.button-cancel {
+    float: right;
+    height: 35px;
+    width: 100px;
+    background: transparent;
+    color: red;
+    border-color: transparent;
+}
+
+.button-confirm {
+    float: right;
+    height: 35px;
+    width: 100px;
+    background: #0476D9;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+}
+
+.button-confirm:hover {
+    float: right;
+    height: 35px;
+    width: 100px;
+    background: #045ba6;
+    color: white;
+    border: 2px solid #0476D9;
+    border-radius: 10px;
+}
+
+.bottom {
+    width: 677px;
+}

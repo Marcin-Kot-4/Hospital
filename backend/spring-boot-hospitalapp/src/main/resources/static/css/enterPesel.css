@@ -1,0 +1,9 @@
+.form-control, .form-control:focus {
+    width: 200px;
+    height: 25px;
+    background: #E5E5E5;
+    border-radius: 10px;
+    border-color: transparent;
+    outline: none;
+}
+
